@@ -1,11 +1,20 @@
+import {useState} from 'react'
 
+import Header from './components/Header'
+import ProductList from './components/ProductList'
+import CartSummary from './components/CartSummary'
 
 function App() {
+  const [products, setProducts] = useState([]) 
+  const [carts, setCarts] = useState([])
 
   return (
-    <div className="app">
-     <h1 className="text-3xl text-amber-300">Codecamp20</h1>
-     <button className="btn btn-primary">OK</button>
+    <div className='h-screen flex flex-col'>
+      <Header itemCount={carts.length}/>
+      <div className='flex flex-1'>
+        <ProductList products={products}/>
+        <CartSummary carts={carts}/>
+      </div>
     </div>
   )
 }
