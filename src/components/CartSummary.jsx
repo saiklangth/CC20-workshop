@@ -3,6 +3,9 @@ import CartItem from './CartItem'
 
 function CartSummary(props) {
   const { carts, decQuantity, addToCart } = props
+  const total = carts.reduce((a, c) => a += c.price * c.quantity, 0)
+  const vat = total * 0.07
+  const finalTotal = total + vat
   return (
     <div className='w-1/3'>
       <h2 className='text-2xl py-2'>Cart Item :</h2>
@@ -13,6 +16,23 @@ function CartSummary(props) {
         ))}
       </div>
       {/* <pre>{JSON.stringify(carts,null,2)}</pre> */}
+      {carts.length > 0 && (
+        <>
+          <div className='divider'>Total</div>
+          <div className='flex justify-between px-1.5 flex-1'>
+            <p className='font-bold'>Total</p>
+            <p>${total.toFixed(2)}</p>
+          </div>
+          <div className='flex justify-between px-1.5 flex-1'>
+            <p className='font-bold'>VAT</p>
+            <p>${vat.toFixed(2)}</p>
+          </div>
+          <div className='flex justify-between px-1.5 flex-1'>
+            <p className='font-bold'>Final Total</p>
+            <p className='underline'>${finalTotal.toFixed(2)}</p>
+          </div>
+        </>
+      )}
     </div>
   )
 }
